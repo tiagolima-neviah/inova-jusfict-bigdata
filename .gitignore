@@ -1,0 +1,28 @@
+# Repositório público: a salinha de obras fica fora do git (doutrina de 27/07)
+.contexto/
+
+# Segredos e ambiente
+.env
+.env.*
+!.env.example
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.mypy_cache/
+.ruff_cache/
+.pytest_cache/
+dist/
+build/
+*.egg-info/
+
+# Dados locais (bronze/silver/gold vivem fora do git)
+data/
+*.parquet
+*.duckdb
+
+# Diversos
+.DS_Store
+Thumbs.db
