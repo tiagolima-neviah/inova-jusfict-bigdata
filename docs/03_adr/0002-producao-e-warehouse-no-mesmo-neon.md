@@ -1,6 +1,6 @@
 <a id="topo"></a>
 
-# ADR 0003 · Produção e warehouse no mesmo projeto Neon, schemas separados
+# ADR 0002 · Produção e warehouse no mesmo projeto Neon, schemas separados
 
 <!-- nav:start -->
 [Home](../../README.md) | [Hub de docs](../README.md)
@@ -18,7 +18,7 @@ A produção da plataforma mora no Neon desde o início, no schema `inova`, e o 
 
 ## Justificativa
 
-A plataforma no Render precisa de um Postgres acessível na internet de qualquer forma; mantê-la no Neon elimina um banco local a sincronizar e deixa a demo inteira viva com 1 serviço de banco. O volume do case (poucos milhares de inovações e suas movimentações) cabe com folga no limite do plano. O isolamento entre produção e análise continua provado onde importa: nenhuma consulta analítica roda na produção, porque a análise acontece no staging local e nas camadas de arquivo.
+A plataforma no Render precisa de um Postgres acessível na internet de qualquer forma; mantê-la no Neon elimina um banco local a sincronizar e deixa a demo inteira viva com 1 serviço de banco. O volume do case (algumas centenas de inovações e suas movimentações) cabe com folga no limite do plano. O isolamento entre produção e análise continua provado onde importa: nenhuma consulta analítica roda na produção, porque a análise acontece no staging local e nas camadas de arquivo.
 
 ## Consequências
 

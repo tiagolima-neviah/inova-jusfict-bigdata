@@ -16,7 +16,7 @@ O código da plataforma e do painel vive no repositório irmão `inova-jusfict-a
 
 ## Arquitetura em uma linha
 
-Produção (Postgres da plataforma; no cliente real seria Oracle, ver ADR 0001) → staging Postgres (réplica D-1) → bronze (parquet) → silver (DuckDB, com régua de qualidade que se reprova sozinha) → gold (star schema, grão dia) → warehouse Postgres (recorte no Neon) → painel, ML e agente.
+Produção (Postgres da plataforma, no Neon) → staging Postgres local (réplica D-1) → bronze (parquet) → silver (DuckDB, com régua de qualidade que se reprova sozinha) → gold (star schema, grão dia) → warehouse (mesmo projeto Neon, schema `dw`) → painel, ML e agente.
 
 Detalhes em [docs/02_arquitetura_do_pipeline.md](docs/02_arquitetura_do_pipeline.md).
 

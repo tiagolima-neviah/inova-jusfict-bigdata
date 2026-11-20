@@ -12,9 +12,8 @@
 |---|---|
 | [01 · Problema e necessidade](01_problema_e_necessidade.md) | Por que a JusFict Inova existe e que perguntas o dado precisa responder |
 | [02 · Arquitetura do pipeline](02_arquitetura_do_pipeline.md) | O caminho do dado, camada por camada, com as ferramentas e o porquê de cada uma |
-| [ADR 0001 · Origem Oracle documentada, demo em Postgres](03_adr/0001-origem-oracle-documentada.md) | Por que a demo não constrói o Oracle do case |
-| [ADR 0002 · Sem orquestrador na v1](03_adr/0002-sem-orquestrador-na-v1.md) | Por que a carga D-1 roda por comando e como o Dagster entraria |
-| [ADR 0003 · Produção e warehouse no mesmo Neon](03_adr/0003-producao-e-warehouse-no-mesmo-neon.md) | Por que os dois schemas vivem no mesmo projeto Neon free |
+| [ADR 0001 · Sem orquestrador na v1](03_adr/0001-sem-orquestrador-na-v1.md) | Por que a carga D-1 roda por comando e como o Dagster entraria |
+| [ADR 0002 · Produção e warehouse no mesmo Neon](03_adr/0002-producao-e-warehouse-no-mesmo-neon.md) | Por que os dois schemas vivem no mesmo projeto Neon free |
 
 Documentos de qualidade de dados, dicionário da gold e manual de operação nascem junto com as fases v0.4.0 e v0.5.0.
 

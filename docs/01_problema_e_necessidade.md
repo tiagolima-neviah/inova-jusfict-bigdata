@@ -33,9 +33,9 @@ Um lugar único onde toda inovação é registrada, avaliada com rastro auditáv
 
 ## 4. Premissas do case
 
-- Origem no cliente real seria um Oracle corporativo; a demo usa Postgres de ponta a ponta ([ADR 0001](03_adr/0001-origem-oracle-documentada.md)).
+- Produção da plataforma e warehouse vivem no mesmo projeto Neon free, em schemas separados ([ADR 0002](03_adr/0002-producao-e-warehouse-no-mesmo-neon.md)).
 - Carga em D-1: o painel conta a história até ontem, e isso fica declarado no rodapé dele.
-- Volume sintético: cerca de 3 anos de uso simulado da plataforma, alguns milhares de inovações com histórico de transições e interações coerentes.
+- Volume sintético: plataforma viva desde 02/01/2024 (2024 e 2025 cheios, 2026 até 20/11), com algumas centenas de inovações do cotidiano e histórico de transições e interações coerentes.
 
 ---
 

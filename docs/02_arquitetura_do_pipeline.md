@@ -11,7 +11,7 @@
 ## 1. Visão geral
 
 ```
-produção (Postgres no Neon, schema inova)  [no cliente real: Oracle, ADR 0001]
+produção (Postgres no Neon, schema inova)
         │  extração D-1 (conexão direta, sem -pooler)
 staging (Postgres local na WSL)            isola a análise da produção
         │  extração completa por tabela
@@ -24,7 +24,7 @@ gold (parquet, star schema, grão dia)      um número só para cada pergunta do
 warehouse (mesmo Neon, schema dw)          onde painel, ML e agente leem
 ```
 
-A produção da plataforma e o warehouse vivem no mesmo projeto Neon free, em schemas separados ([ADR 0003](03_adr/0003-producao-e-warehouse-no-mesmo-neon.md)); staging e camadas de arquivo ficam locais na WSL.
+A produção da plataforma e o warehouse vivem no mesmo projeto Neon free, em schemas separados ([ADR 0002](03_adr/0002-producao-e-warehouse-no-mesmo-neon.md)); staging e camadas de arquivo ficam locais na WSL.
 
 ## 2. Por que cada camada existe
 
@@ -34,7 +34,7 @@ A produção da plataforma e o warehouse vivem no mesmo projeto Neon free, em sc
 | Bronze | Guardar a foto fiel da origem em formato colunar barato (parquet), com data de extração e linhagem, para reprocessar sem voltar à origem |
 | Silver | Tipos certos, textos saneados, regras de integridade conferidas. A régua de qualidade é código que falha (exit 1) quando o dado reprova: validação prova concordância, não premissa |
 | Gold | Star schema no grão dia: dimensões `dim_data`, `dim_departamento`, `dim_usuario`, `dim_status`, `dim_destino`; fatos `fato_inovacao` (uma linha por inovação, com as datas de cada marco) e `fato_movimentacao` (uma linha por transição de status). É o que garante "um número só" |
-| Warehouse | Postgres dimensional para o painel e qualquer ferramenta de BI (Excel, Power BI, Tableau) conectarem; vive no schema `dw` do mesmo projeto Neon da produção (ADR 0003), público para a demo |
+| Warehouse | Postgres dimensional para o painel e qualquer ferramenta de BI (Excel, Power BI, Tableau) conectarem; vive no schema `dw` do mesmo projeto Neon da produção (ADR 0002), público para a demo |
 
 ## 3. Ferramentas e o porquê
 
@@ -42,7 +42,7 @@ A produção da plataforma e o warehouse vivem no mesmo projeto Neon free, em sc
 - **fsspec** abstrai o storage (`file://` hoje, `s3://` se um dia for para AWS, GCP ou Azure; em volume grande, as transformações migrariam para Spark com o mesmo desenho de camadas). Portabilidade é desenho, não promessa.
 - **Gerador sintético determinístico** com semente fixa popula a produção com 3 anos de uso simulado; régua própria reprova e regenera, porque defeito de base sintética se regenera, não se contorna. Decisão declarada: o dado sintético nasce limpo, sem sujeira fabricada; a régua da silver roda do mesmo jeito e a aprovação integral é o resultado esperado. Num cliente real é essa régua que segura a carga.
 - **Esteira de qualidade de código** (ruff, mypy, pytest, CI no GitHub Actions) desde o primeiro commit.
-- **Sem orquestrador na v1** ([ADR 0002](03_adr/0002-sem-orquestrador-na-v1.md)): a carga D-1 é uma sequência de funções puras chamadas por linha de comando, prontas para virarem assets de Dagster se o projeto crescer.
+- **Sem orquestrador na v1** ([ADR 0001](03_adr/0001-sem-orquestrador-na-v1.md)): a carga D-1 é uma sequência de funções puras chamadas por linha de comando, prontas para virarem assets de Dagster se o projeto crescer.
 
 ## 4. Consumidores da gold
 
