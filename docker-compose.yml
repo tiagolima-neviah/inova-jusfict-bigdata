@@ -1,0 +1,27 @@
+# Staging do pipeline: um Postgres local, isolado da producao.
+# A extracao copia a producao (Neon) para ca; toda consulta analitica pesada
+# roda aqui ou nos arquivos do lake, nunca no banco que as pessoas usam.
+#
+#   docker compose up -d      # sobe o staging
+#   docker compose down       # derruba (os dados ficam no volume)
+#   docker compose down -v    # derruba e apaga os dados
+services:
+  staging:
+    image: postgres:16-alpine
+    container_name: jusfict-staging
+    environment:
+      POSTGRES_USER: staging
+      POSTGRES_PASSWORD: staging
+      POSTGRES_DB: jusfict_staging
+    ports:
+      - "5433:5432"
+    volumes:
+      - dados_staging:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U staging -d jusfict_staging"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+volumes:
+  dados_staging:
