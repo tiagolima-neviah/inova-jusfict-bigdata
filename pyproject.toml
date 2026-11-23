@@ -6,6 +6,7 @@ readme = "README.md"
 requires-python = ">=3.12"
 license = { text = "MIT" }
 dependencies = [
+    "anthropic>=2.12.0",
     "duckdb>=1.1",
     "psycopg[binary]>=3.2",
     "pyarrow>=17",
@@ -29,6 +30,8 @@ select = ["E", "F", "I", "B", "UP", "SIM", "N"]
 [tool.ruff.lint.per-file-ignores]
 # Catálogo é texto: frase longa de descrição não se quebra no meio.
 "inova_bigdata/gerador/catalogo.py" = ["E501"]
+# O prompt da Têmis também é texto corrido.
+"inova_bigdata/temis/parecer.py" = ["E501"]
 
 [tool.mypy]
 python_version = "3.12"

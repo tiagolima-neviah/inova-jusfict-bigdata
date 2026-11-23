@@ -6,6 +6,10 @@
 Sai com código 0 se tudo passou e 1 se alguma etapa falhou ou se uma régua de
 qualidade reprovou. Uma etapa que falha interrompe as seguintes: gold nunca
 é modelada sobre uma silver reprovada, e o warehouse nunca recebe gold ruim.
+
+A primeira etapa, , emite o parecer das inovações que ainda não têm
+(poucas de cada vez; ver inova_bigdata/temis/lote.py). Sem chave da API ela é
+pulada com um aviso e o resto do pipeline roda igual.
 """
 
 from __future__ import annotations
@@ -17,10 +21,12 @@ from collections.abc import Callable
 
 from inova_bigdata import config
 from inova_bigdata.pipeline import ReguaReprovou, bronze, gold, silver, staging, warehouse
+from inova_bigdata.temis import lote as temis
 
 Etapa = Callable[[config.Config], dict[str, int]]
 
 ETAPAS: dict[str, tuple[str, Etapa]] = {
+    "temis": ("parecer da Têmis para as inovações novas (produção)", temis.etapa),
     "staging": ("produção (Neon) -> staging (Postgres local)", staging.extrair),
     "bronze": ("staging -> parquet com linhagem", bronze.gravar),
     "silver": ("limpeza, tipos e régua de qualidade", silver.transformar),
