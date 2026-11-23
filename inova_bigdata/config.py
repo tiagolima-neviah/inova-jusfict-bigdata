@@ -30,5 +30,5 @@ def carregar() -> Config:
         plataforma_url=plataforma,
         staging_url=os.environ.get("STAGING_URL", ""),
         dw_url=os.environ.get("DW_NEON_URL", "") or plataforma,
-        lake=Path(os.environ.get("LAKE_DIR", str(RAIZ / "lake"))),
+        lake=Path(os.environ.get("LAKE_DIR") or RAIZ / "lake"),
     )
