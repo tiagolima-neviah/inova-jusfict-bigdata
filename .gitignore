@@ -26,3 +26,6 @@ data/
 # Diversos
 .DS_Store
 Thumbs.db
+
+# Camadas de arquivo do pipeline (bronze, silver, gold): geradas, nunca versionadas
+lake/
