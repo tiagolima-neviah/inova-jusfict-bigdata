@@ -19,13 +19,15 @@
 
 ## 2. Instalação
 
-Pré-requisitos: Linux ou WSL, Python 3.12, [uv](https://docs.astral.sh/uv/) e Docker (para o staging). E a plataforma já instalada: o banco do `inova-jusfict-app` precisa existir, com o schema `inova` e as 12 pessoas de demonstração (o manual técnico de lá ensina).
+Pré-requisitos: Linux ou WSL, Python 3.12, [uv](https://docs.astral.sh/uv/) e Docker (para o staging). E a plataforma já instalada: o banco do `inova-jusfict-app` precisa existir, com o schema `inova` e as 12 pessoas de demonstração (o manual técnico de lá ensina). Primeira vez com o projeto? O [00 · Primeiros passos](https://github.com/tiagolima-neviah/inova-jusfict-app/blob/main/docs/00_primeiros_passos.md) mostra a ordem dos 2 repositórios num caminho só.
 
 ```bash
 cd inova-jusfict-bigdata
 uv sync                   # instala as dependências no .venv
 cp .env.example .env      # depois edite o .env
 ```
+
+**Por que copiar o `.env.example`, e não renomear.** O `.env.example` é o modelo: fica no git, não tem segredo e mostra quais variáveis existem. O `.env` é a sua cópia preenchida, com a string do banco e a chave, e o `.gitignore` o mantém fora do git. Renomear tira o modelo do lugar: o `git status` acusa o `.env.example` como apagado, e um commit descuidado o apaga do repositório para todo mundo. Por isso o comando é `cp`.
 
 O `.env`:
 
@@ -39,6 +41,8 @@ O `.env`:
 | `TEMIS_MODELO`, `TEMIS_LIMITE_NO_PIPELINE` | opcionais da Têmis | em branco valem os padrões (`claude-opus-5-5` e 30) |
 
 O `.env` nunca vai para o git, e nem a string do banco nem a chave vão para uma conversa, um print ou um commit.
+
+Na Neviah, este repositório vive na distro WSL `neviah-bigdata-dev` (a plataforma fica na `neviah-dash-dev`), com o Docker do staging já instalado. O `uv` vem pelo `mise`: em terminal interativo basta `uv ...`; em script, `~/.local/bin/mise exec -- uv ...`.
 
 Confira a instalação sem tocar em nada:
 

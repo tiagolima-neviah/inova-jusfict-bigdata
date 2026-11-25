@@ -26,8 +26,10 @@ Detalhes em [docs/02_arquitetura_do_pipeline.md](docs/02_arquitetura_do_pipeline
 
 ## Como usar
 
+**Primeira vez?** A ordem que atravessa os 2 repositórios (a plataforma cria o banco, este repositório gera a história e carrega o painel, a plataforma sobe) está no [00 · Primeiros passos](https://github.com/tiagolima-neviah/inova-jusfict-app/blob/main/docs/00_primeiros_passos.md) do `inova-jusfict-app`.
+
 ```bash
-uv sync && cp .env.example .env               # instale e preencha o .env
+uv sync && cp .env.example .env               # instale; copie o modelo (não renomeie) e preencha o .env
 uv run python -m inova_bigdata.pipeline       # atualiza o painel, de ponta a ponta
 uv run python -m inova_bigdata.pipeline.conferir   # prova que o painel bate com a plataforma
 uv run python -m inova_bigdata.temis --estimar     # quanto custa emitir os pareceres que faltam
